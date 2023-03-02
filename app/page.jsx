@@ -5,8 +5,7 @@ import Sections from './UI Components/5.layouts/Sections'
 
 export default async function Home() {
 
-  const inTheaters = await fetchAPI('movie', 'now_playing');
-  const inTV = await fetchAPI('tv', 'on_the_air');
+  const res = fetchAPI();
 
   return (
     <main className={styles.main}>
@@ -18,13 +17,13 @@ export default async function Home() {
         <Sections 
           sectionTitle='Cinema'
           subtitle='Esplora i film attualmente nei cinema'
-          category={inTheaters}
+          category={(await res).theatersRes}
           slug='movie'
         />
         <Sections 
           sectionTitle='TV e Streaming'
           subtitle='Esplora le serie TV del momento'
-          category={inTV}
+          category={(await res).tvRes}
           slug='tv'
         />
       </div>
