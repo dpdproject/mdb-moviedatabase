@@ -5,7 +5,7 @@ export const fetchAPI = async() => {
         const TvData = await fetch(`https://api.themoviedb.org/3/tv/on_the_air?api_key=${process.env.API_KEY}`)
         const theatersRes = await TheatersData.json();
         const tvRes = await TvData.json();
-
+        
         const res = {
             theatersRes,
             tvRes
@@ -19,12 +19,17 @@ export const fetchAPI = async() => {
 }
 
 export async function fetchMovieDetails(slug, id) {
+
+    const key = process.env.API_KEY;
+
     try {
-        const tempData = await fetch(`https://api.themoviedb.org/3/${slug}/${id}?api_key=${process.env.API_KEY}`)
-        const tempImages = await fetch(`https://api.themoviedb.org/3/${slug}/${id}/images?api_key=${process.env.API_KEY}`)
+        const tempData = await fetch(`https://api.themoviedb.org/3/${slug}/${id}?api_key=${key}`)
+        const tempImages = await fetch(`https://api.themoviedb.org/3/${slug}/${id}/images?api_key=${key}`)
+        const tempReviews = await fetch(`https://api.themoviedb.org/3/${slug}/${id}/reviews?api_key=${key}`)
         const data = await tempData.json();
         const images = await tempImages.json();
-        const res = {...data, images}
+        const reviews = await tempReviews.json()
+        const res = {...data, images, reviews}
 
         return res
     } catch (e) {

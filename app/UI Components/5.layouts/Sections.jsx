@@ -2,8 +2,10 @@ import Title from "../1.atoms/Title"
 import MovieGrid from "../4.templates/MovieGrid"
 
 export default function Sections(props) {
+    props.category.results.sort((y, x) => x.popularity - y.popularity);
+
     return (
-        <section className="">
+        <section>
             <span className="p-5">
                 <Title 
                     text={props.sectionTitle}

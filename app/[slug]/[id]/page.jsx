@@ -4,6 +4,7 @@ import Title from '../../UI Components/1.atoms/Title';
 import Pill from '../../UI Components/1.atoms/Pill';
 import Details from '../../UI Components/2.molecules/Details';
 import Image from '@/app/UI Components/1.atoms/Image';
+import ReviewGrid from '@/app/UI Components/4.templates/ReviewGrid';
 
 export default async function Page({ params }) {
 
@@ -26,7 +27,7 @@ export default async function Page({ params }) {
                         <p className='mt-8'>{details.overview}</p>
                     </div>
                     <div className='flex gap-2 my-5 justify-center'>
-                        {details?.genres.map((genre) => (
+                        {details.genres.map((genre) => (
                             <Pill
                                 key={genre.id}
                                 text={genre.name}
@@ -35,29 +36,29 @@ export default async function Page({ params }) {
                     </div>
                     <div className='text-center md:text-start'>
                         <Title 
-                            className='text-xl text-red-900 font-bold underline underline-offset-4'
-                            text='Dettagli'
+                            className='text-xl text-red-900 font-bold underline underline-offset-4 mb-4'
+                            text='Details'
                         />
-                        <div className='grid lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4'>
+                        <div className='grid lg:grid-cols-2 xl:grid-cols-3 gap-4'>
                             <Details 
                                 title='Release Date'
-                                text={details?.release_date}
+                                text={details.release_date}
                             />
                             <Details 
                                 title='Production Countries'
-                                text={details?.production_countries.map((country) => (<li key={country.iso_3166_1}>{country.name}</li>))}
+                                text={details.production_countries.map((country) => (<li key={country.iso_3166_1}>{country.name}</li>))}
                             />
                             <Details 
                                 title='Production Companies'
-                                text={details?.production_companies.map((company) => (<li key={company.id}>{company.name} ({company.origin_country})</li>))}
+                                text={details.production_companies.map((company) => (<li key={company.id}>{company.name} ({company.origin_country})</li>))}
                             />
                             <Details 
                                 title='Spoken Languages'
-                                text={details?.spoken_languages.map((language) => (<li key={language.iso_639_1}>{language.english_name}</li>))}
+                                text={details.spoken_languages.map((language) => (<li key={language.iso_639_1}>{language.english_name}</li>))}
                             />
                             <Details 
                                 title='Official Site'
-                                text={<a className='underline underline-offset-2' href={details?.homepage} target='_blank'>Click here!</a>}
+                                text={<a className='underline underline-offset-2' href={details.homepage} target='_blank'>Click here!</a>}
                             />
                         </div>
                     </div>
@@ -66,7 +67,7 @@ export default async function Page({ params }) {
             <div className='flex items-center relative mb-10'>
                 <i className="fi fi-rr-angle-left mt-16 md:pr-5 md:text-2xl"></i>
                 <div className='flex flex-nowrap gap-x-10 overflow-x-scroll snap-x snap-mandatory mt-10 relative'>
-                    {details?.images.backdrops.map((img) => (
+                    {details.images.backdrops.map((img) => (
                         <Image 
                             key={img.file_path}
                             imageURL={img.file_path}
@@ -76,6 +77,15 @@ export default async function Page({ params }) {
                 </div>
                 <i className="fi fi-rr-angle-right mt-16 md:pl-5 md:text-2xl"></i>
             </div>
+            <section className='mx-20 h-128'>
+                <Title
+                    className='text-xl text-red-900 font-bold underline underline-offset-4 mb-4'
+                    text='Reviews'
+                />
+                <ReviewGrid
+                    reviews={details.reviews.results}
+                />
+            </section>
         </main>
     )
 }
