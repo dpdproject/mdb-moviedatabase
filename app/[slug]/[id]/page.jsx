@@ -77,7 +77,7 @@ export default async function Page({ params }) {
                 </div>
                 <i className="fi fi-rr-angle-right mt-16 md:pl-5 md:text-2xl"></i>
             </div>
-            <section className='mx-20 h-128'>
+            <section className='mx-1 md:mx-20 h-128 text-center md:text-start'>
                 <Title
                     className='text-xl text-red-900 font-bold underline underline-offset-4 mb-4'
                     text='Reviews'
